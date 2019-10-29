@@ -1,0 +1,15 @@
+{
+  "name": "martian-robots",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "author": "David Picarra",
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier --write **/*.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "prettier": "1.18.2"
+  }
+}
