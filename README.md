@@ -13,6 +13,7 @@ $ nvm use
 # yarn
 $ yarn
 $ yarn start
+# follow instructions and press CTRL+C to exit the node script
 
 # run tests
 $ yarn test
@@ -47,9 +48,11 @@ Sample Output
 2 3 S
 ```
 
-Created unit test with 100% coverage and added specific test to try the scenario provided:
+Created unit test with 100% coverage for the martian robot (excluding user input as per the future work section) and added specific test to try the scenario provided:
 > [should execute the sample test correctly](https://github.com/davidpicarra/martian-robots/blob/master/src/main.spec.js#L206)
 
 ## Future work
 - [ ] Read from file
-- [ ] Read from user input
+- [x] Read from user input
+- [ ] Improve user input to re-use world instead of creating new one for each new robot created
+- [ ] Improve test coverage for user input

@@ -1,3 +1,5 @@
+const readline = require('readline')
+
 const { MartianWorld } = require('./martianWorld')
 
 const martianRobot = input => {
@@ -29,6 +31,31 @@ const martianRobot = input => {
     return `Martian robot malfunction [${e.message}]`
   }
 }
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
+
+rl.question('Upper-right coordinates: ', maximumSize => {
+  let input = [maximumSize]
+
+  const createRobot = () => {
+    rl.question('Robot initial position: ', initialPosition => {
+      input.push(initialPosition)
+
+      rl.question('Robot commands: ', commands => {
+        input.push(commands)
+
+        console.log(martianRobot(input.join('\n')))
+
+        return createRobot()
+      })
+    })
+  }
+
+  createRobot()
+})
 
 module.exports = {
   martianRobot,

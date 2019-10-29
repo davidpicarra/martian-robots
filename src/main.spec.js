@@ -1,5 +1,7 @@
 const { martianRobot } = require('./main')
 
+jest.mock('readline')
+
 describe('martianRobot', () => {
   describe('rotation', () => {
     it('rotate right', () => {

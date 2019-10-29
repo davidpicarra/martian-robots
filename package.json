@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "prettier": "prettier --write **/*.js",
-    "test": "jest"
+    "test": "jest",
+    "start": "node src/main.js"
   },
   "devDependencies": {
     "jest": "^24.9.0",
