@@ -48,7 +48,7 @@ describe('martianRobot', () => {
   })
 
   describe('movement', () => {
-    it('move up', () => {
+    it('move north', () => {
       // Arrange.
       const input = `5 3
       1 1 N
@@ -59,7 +59,7 @@ describe('martianRobot', () => {
       expect(output).toBe('1 2 N')
     })
 
-    it('move right', () => {
+    it('move west', () => {
       // Arrange.
       const input = `5 3
       1 1 E
@@ -70,7 +70,7 @@ describe('martianRobot', () => {
       expect(output).toBe('2 1 E')
     })
 
-    it('move down', () => {
+    it('move south', () => {
       // Arrange.
       const input = `5 3
       1 1 S
@@ -81,7 +81,7 @@ describe('martianRobot', () => {
       expect(output).toBe('1 0 S')
     })
 
-    it('move left', () => {
+    it('move east', () => {
       // Arrange.
       const input = `5 3
       1 1 W
@@ -131,6 +131,75 @@ describe('martianRobot', () => {
       const output = martianRobot(input)
       // Assert.
       expect(output).toBe('1 1 E LOST')
+    })
+
+    it('ignore commands after being lost', () => {
+      // Arrange.
+      const input = `1 1
+      1 1 E
+      FRRLLF`
+      // Act.
+      const output = martianRobot(input)
+      // Assert.
+      expect(output).toBe('1 1 E LOST')
+    })
+  })
+
+  describe('scent', () => {
+    it('can detect north is not good', () => {
+      // Arrange.
+      const input = `1 1
+      1 1 N
+      F
+      1 1 N
+      F`
+      // Act.
+      const output = martianRobot(input)
+      // Assert.
+      expect(output).toBe(`1 1 N LOST
+1 1 N`)
+    })
+
+    it('can detect east is not good', () => {
+      // Arrange.
+      const input = `1 1
+      1 1 E
+      F
+      1 1 E
+      F`
+      // Act.
+      const output = martianRobot(input)
+      // Assert.
+      expect(output).toBe(`1 1 E LOST
+1 1 E`)
+    })
+
+    it('can detect south is not good', () => {
+      // Arrange.
+      const input = `1 1
+      0 0 S
+      F
+      0 0 S
+      F`
+      // Act.
+      const output = martianRobot(input)
+      // Assert.
+      expect(output).toBe(`0 0 S LOST
+0 0 S`)
+    })
+
+    it('can detect west is not good', () => {
+      // Arrange.
+      const input = `1 1
+      0 0 W
+      F
+      0 0 W
+      F`
+      // Act.
+      const output = martianRobot(input)
+      // Assert.
+      expect(output).toBe(`0 0 W LOST
+0 0 W`)
     })
   })
 

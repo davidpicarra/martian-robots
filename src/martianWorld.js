@@ -5,6 +5,7 @@ class MartianWorld {
     this.maximumX = maximumX
     this.maximumY = maximumY
     this.robots = []
+    this.avoidCoordinates = []
   }
 
   spawnRobot(x, y, orientation, commands) {
@@ -68,7 +69,10 @@ class MartianWorld {
         break
     }
 
-    if (this.isLostRobot(movedRobot)) {
+    if (this.shouldIgnoreMove(movedRobot)) {
+      return robot
+    } else if (this.isLostRobot(movedRobot)) {
+      this.avoidCoordinates.push({ x: movedRobot.x, y: movedRobot.y })
       robot.state = 'LOST'
       return robot
     } else {
@@ -76,12 +80,18 @@ class MartianWorld {
     }
   }
 
+  shouldIgnoreMove(movedRobot) {
+    return this.avoidCoordinates.find(
+      ({ x, y }) => movedRobot.x === x && movedRobot.y === y
+    )
+  }
+
   isLostRobot(robot) {
     return (
       robot.x < 0 ||
       robot.x > this.maximumX ||
       robot.y > this.maximumY ||
-      this.y < 0
+      robot.y < 0
     )
   }
 

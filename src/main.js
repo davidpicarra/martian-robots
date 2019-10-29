@@ -6,7 +6,7 @@ const martianRobot = input => {
 
     const [maximumX, maximumY] = inputLines.shift().split(' ')
 
-    const martianWorld = new MartianWorld(maximumX, maximumY)
+    const martianWorld = new MartianWorld(Number(maximumX), Number(maximumY))
 
     for (let i = 0; i < inputLines.length; i = i + 2) {
       const [
@@ -17,8 +17,8 @@ const martianRobot = input => {
       const commands = inputLines[i + 1]
 
       martianWorld.spawnRobot(
-        startingPositionX,
-        startingPositionY,
+        Number(startingPositionX),
+        Number(startingPositionY),
         startingOrientation,
         commands
       )

@@ -1,0 +1,49 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/project/martian-robots
+  docker:
+    - image: circleci/node:10.16.3
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Yarn audit packages
+          command: yarn audit
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - martian-robots
+
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: JavaScript Test Suite
+          command: yarn test --ci
+
+workflows:
+  version: 2
+  install-and-test:
+    jobs:
+      - install
+      - test:
+          requires:
+            - install
