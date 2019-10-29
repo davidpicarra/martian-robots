@@ -3,6 +3,21 @@
 
 > A Node.js project to solve the Martian Robot challenge
 
+## How to run the app
+
+In order to run the app locally, the following commands must be executed:
+```bash
+# be sure to run supported node version
+$ nvm use
+
+# yarn
+$ yarn
+$ yarn start
+
+# run tests
+$ yarn test
+```
+
 ## What was done
 
 A function named `martianRobot` which will receive as input a string containing the following:
