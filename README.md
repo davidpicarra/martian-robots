@@ -1,5 +1,5 @@
 # David Piçarra - Martian Robot
-[![CircleCI](https://img.shields.io/circleci/project/github/davidpicarra/martian-robot.svg)](https://circleci.com/gh/davidpicarra/martian-robot)
+[![CircleCI](https://img.shields.io/circleci/project/github/davidpicarra/martian-robots.svg)](https://circleci.com/gh/davidpicarra/martian-robots)
 
 > A Node.js project to solve the Martian Robot challenge
 
@@ -46,6 +46,9 @@ Sample Output
 3 3 N LOST
 2 3 S
 ```
+
+Created unit test with 100% coverage and added specific test to try the scenario provided:
+> [should execute the sample test correctly](https://github.com/davidpicarra/martian-robots/blob/master/src/main.spec.js#L206)
 
 ## Future work
 - [ ] Read from file
