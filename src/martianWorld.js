@@ -20,7 +20,9 @@ class MartianWorld {
         break
       }
     }
-    let robotStatus = `${robot.x} ${robot.y} ${cardinalPoints[robot.orientation]}`
+    let robotStatus = `${robot.x} ${robot.y} ${
+      cardinalPoints[robot.orientation]
+    }`
     if (robot.state !== 'IDLE') {
       robotStatus += ` ${robot.state}`
     }
@@ -30,22 +32,21 @@ class MartianWorld {
   executeCommandOnRobot(robot, command) {
     switch (command) {
       case 'L':
-        robot.orientation =
-          robot.orientation === 0
-            ? cardinalPoints.length
-            : robot.orientation - 1
+        robot.orientation--
+        if (robot.orientation < 0) {
+          robot.orientation = cardinalPoints.length - 1
+        }
         break
       case 'R':
-        robot.orientation =
-          robot.orientation === cardinalPoints.length
-            ? 0
-            : robot.orientation + 1
+        robot.orientation++
+        if (robot.orientation > cardinalPoints.length - 1) {
+          robot.orientation = 0
+        }
         break
       case 'F':
         robot = this.moveRobot(robot)
         break
     }
-    this.validateRobot(robot)
     return robot
   }
 
@@ -67,13 +68,21 @@ class MartianWorld {
         break
     }
 
-    return movedRobot
+    if (this.isLostRobot(movedRobot)) {
+      robot.state = 'LOST'
+      return robot
+    } else {
+      return movedRobot
+    }
   }
 
-  validateRobot(robot) {
-    if (robot.x < 0 || robot.x > this.maximumX) {
-      robot.state = 'LOST'
-    }
+  isLostRobot(robot) {
+    return (
+      robot.x < 0 ||
+      robot.x > this.maximumX ||
+      robot.y > this.maximumY ||
+      this.y < 0
+    )
   }
 
   get output() {
